@@ -9,10 +9,10 @@ import time
 from selenium import webdriver
 
 
-
+print("version 1.0.0")
 # 학교 이름, 책 이름 변수 값 설정
-schoolname = "학교 이름"
-booksname = "책 이름"
+schoolname = "송악고등학교"
+booksname = "자바"
 
 #크롬 드라이버 실행(그대신 개인정보 보안을 위해 시크릿탭을 이용하여 접속)
 chrome_options = webdriver.ChromeOptions() #옵션 설정
@@ -22,12 +22,12 @@ driver.get("https://reading.edus.or.kr/r/newReading/search/schoolListForm.jsp") 
 assert "우리학교자료검색 | 독서교육종합시스템입니다." in driver.title #타이틀이 맞는지 확인
 
 #input칸 id를 이용하여 찾고, 학교 이름 검색 후 enter키 입력
-schnamesearchinput = driver.find_element(By.ID, 'schoolSearch') 
+schnamesearchinput = driver.find_element(By.XPATH, '//*[@id="schoolSearch"]') 
 schnamesearchinput.send_keys(schoolname)
 schnamesearchinput.send_keys(Keys.RETURN)
 
 #문제가 생길 수도 있으니 time.sleep을 이용하여 텀 가지기
-time.sleep(3)
+time.sleep(2)
 
 #id가 없어서 xpath를 이용하여 해당 경로 click
 a = driver.find_element(By.XPATH, '//*[@id="schoolData"]/div[3]/section/div[3]/ul/li[2]/div/div[2]/a').click()
@@ -41,6 +41,35 @@ booksnameinput = driver.find_element(By.XPATH, '//*[@id="searchCon2"]')
 booksnameinput.send_keys(booksname)
 booksnameinput.send_keys(Keys.RETURN)
 
+#문제가 생길 수도 있으니 time.sleep을 이용하여 텀 가지기
+time.sleep(2)
+bookslist = driver.find_element(By.XPATH, '//*[@id="searchData"]/div/div[3]/div/div[2]/div/p/span')
+bookslist = int(bookslist.text)
+
+if bookslist == 1:
+	print("책이 한개 검색되었습니다")
+	print("=============================================================")
+else:
+	print(f"{bookslist}만큼 검색되었습니다")
+	print("=============================================================")
+	i = 1
+
+	while bookslist >= i:
+		try:
+			print(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[2]/a/span').get_attribute("innerHTML"))
+			#책 이름
+			print(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/div').get_attribute("innerHTML"))
+			#대출 가능 여부(대출가능일때)
+			print("=============================================================")
+		except:
+
+			print(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/p').text)
+			#대출 가능 여부(대출중일때)
+			print("=============================================================")
+
+
+		i += 1
 #실행이 완료되어도 크롬 드라이버가 꺼지지 않게 true pass해놓음.
 while(True):
     	pass
+
