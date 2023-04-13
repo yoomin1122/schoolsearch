@@ -32,7 +32,6 @@ time.sleep(2)
 #id가 없어서 xpath를 이용하여 해당 경로 click
 a = driver.find_element(By.XPATH, '//*[@id="schoolData"]/div[3]/section/div[3]/ul/li[2]/div/div[2]/a').click()
 
-
 #문제가 생길 수도 있으니 time.sleep을 이용하여 텀 가지기
 time.sleep(3)
 
@@ -46,25 +45,38 @@ time.sleep(2)
 bookslist = driver.find_element(By.XPATH, '//*[@id="searchData"]/div/div[3]/div/div[2]/div/p/span')
 bookslist = int(bookslist.text)
 
-if bookslist == 1:
+if bookslist == 1: #책이 한 개만 검색이 되었을때 가장 마지막에 만들 예정
 	print("책이 한개 검색되었습니다")
 	print("=============================================================")
-else:
+elif 0 >= bookslist: #책이 하나도 없을때 
+	print("{}라는 책을 찾을 수 없습니다. 다시 검색 해주시기 바랍니다")
+	exit()
+else: #책이 2개 이상 검색이 되었을때
 	print(f"{bookslist}만큼 검색되었습니다")
 	print("=============================================================")
 	i = 1
 
 	while bookslist >= i:
 		try:
-			print(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[2]/a/span').get_attribute("innerHTML"))
 			#책 이름
-			print(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/div').get_attribute("innerHTML"))
+			print("책 이름 : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[2]/a/span').get_attribute("innerHTML"))
+
+			#책 저자
+			print("저자  : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[1]/span[2]').text)
+
+			#책 출판사
+			print("출판사  : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[2]/span[2]').text)
+
+			#책 청구기호
+			print("책 번호  : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[3]/span[2]').text)
+
 			#대출 가능 여부(대출가능일때)
+			print("대출 가능 여부 : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/div').get_attribute("innerHTML"))
 			print("=============================================================")
 		except:
 
-			print(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/p').text)
 			#대출 가능 여부(대출중일때)
+			print("대출 가능 여부 : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/p').text)
 			print("=============================================================")
 
 
@@ -72,4 +84,3 @@ else:
 #실행이 완료되어도 크롬 드라이버가 꺼지지 않게 true pass해놓음.
 while(True):
     	pass
-
