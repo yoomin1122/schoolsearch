@@ -1,0 +1,35 @@
+form {
+  display: flex;
+  flex-direction: row;
+
+  padding: 1px;
+}
+input:focus {
+  outline: none;
+}
+
+/* Add the focus effect to the form so it contains the button */
+
+input {
+  flex-grow: 2;
+  border-radius: 30px;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
+  width: 435px;
+  height: 70px;
+  text-indent: 17px;
+  font-size : 20px;
+  border: none;
+}
+
+button {
+  background-color: #848beb;
+  border-radius: 30px;
+  border: none;
+  width: 145px;
+  height: 70px;
+  font-size : 20px;
+}
+.leftmargin {
+  margin-left: auto;
+}
