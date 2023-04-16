@@ -1,16 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>송악고등학교 - 독서종합시스템</title>
-</head>
-<body>
-     <h1>소개</h1>
-     <p>직접 쳐서 들어가기 귀찮아서 만들어보았습니다. 별 다른 이유 진짜 없음 진짜 이게 이유임</p>
-     <h1>개발자</h1>
-     <p>나유호(1학년) - 총 개발</p>
-     <a href="http://yoomin.xyz">포트폴리오 보러 가기</a>
-</body>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='readme.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='logo.png') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title>송악고등학교 도서 검색기 소개</title>
+  </head>
+  <body>
+    <header class="title_box">
+      <a href="/"><h2>송악고 도서관 책 검색 웹/앱 소개</h2></a>
+    </header>
+    <div class="main_box">
+      <h3>제작 이유</h3>
+      <p>
+        이러한 개인프로젝트를 직접 제작해보고 싶은 경험때문에 중간고사를 버리고(?)
+        제작을 해봤습니다.
+      </p>
+      <h3>개발자 소개</h3>
+      <p>- 나유호(1학년)</p>
+      <h3>광고</h3>
+      <p>동접자 많으면 넣고 없으면 언젠가 넣고(?)</p>
+      <p style="text-align: center; margin: 1em">
+        제작해보니 재밌네요 히히 나중에도 이런거 또 많이 만들어봐야지
+      </p>
+    </div>
+
+    <footer class="footer_box">
+      <!-- <h3>접속자 IP : {{ip}}</h3> -->
+      <div class="footer-margin">
+        <h3>학생이 직접 제작한 웹 사이트 입니다.</h3>
+        <a href="/">홈  </a>
+        <a href="/search">서비스 소개 </a>
+        <a href="http://yoomin.xyz">포트폴리오 </a>
+        <a href="/privacy">개인정보 처리방침 </a>
+      </div>
+    </footer>
+  </body>
 </html>
