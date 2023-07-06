@@ -22,14 +22,35 @@ h2 {
   width: 720px;
   height: 115px;
 }
-.main_box {
+.main_box_index {
   margin-bottom: 1;
   margin: auto;
   
   width: 720px;
   height: 400px;
 }
-.footer_box {
+.main_box_search {
+  margin-bottom: 1;
+  margin: auto;
+  
+  width: 720px;
+  height: 400px;
+}
+.footer_box_index {
+  margin: auto;
+  text-align: left;
+  color: #fcfcfc;
+  background-color: #7b7b7b;
+  width: 720px;
+  height: 200px;
+  display: flex;
+}
+#wrapper{
+  height : 100%;
+}
+.footer_box_search {
+  height : auto;
+  min-height: 100%;
   margin: auto;
   text-align: left;
   color: #fcfcfc;
