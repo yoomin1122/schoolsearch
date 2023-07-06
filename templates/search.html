@@ -1,10 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>송악고등학교 독서종합시스템</title>
-</head>
-<body>
-    <h1>검색된 책 제목:</h1>
-    <p>{{ value }}</p>
-</body>
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='logo.png') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title>송악고등학교 도서 검색기</title>
+  </head>
+  <body>
+    <header class="title_box">
+      <a href="/"><h2>송악고 도서관 책 검색</h2></a>
+    </header>
+
+    <div class="main_box_search">
+      <p>검색어 : {{ postbookname }}</p>
+      <p>갯수 : {{bookslist}}</p>
+      {%for i in range(0, bookslist)%}
+      <ul>
+        <li>책 이름 : {{bookname[i]}}</li>
+        <li>지은이 : {{bookmake[i]}}</li>
+        <li>출판사 : {{bookPublisher[i]}}</li>
+        <li>청구번호 : {{bookNumber[i]}}</li>
+        <li>대출 가능 여부 : {{bookloan[i]}}</li>
+      </ul>
+  
+      {%endfor%}
+    </div>
+    <div id="wrapper">
+    <footer class="footer_box_footer">
+      <div class="footer-margin">
+        <h3>학생이 직접 제작한 웹 사이트 입니다.</h3>
+        <a href="/read">서비스 소개 </a>
+        <a href="http://yoomin.xyz">포트폴리오 </a>
+        <a href="/privacy">개인정보 처리방침 </a>
+      </div>
+    </div>
+    </footer>
+  </body>
 </html>
