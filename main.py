@@ -15,12 +15,6 @@ from selenium import webdriver
 schoolname = "송악고등학교"
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
-if not os.path.isdir('./{}'.format("log")):
-
-	os.mkdir('./{}'.format("log"))
-	# current_dateTime = datetime.now(pytz.timezone('Asia/Seoul'))
-current_dateTime = datetime.today().strftime('%Y-%m-%d %H-%M-%S')
-f = open(f"./log/{current_dateTime}.txt", 'a')
 print("version 1.0.0")
 
 chrome_options = webdriver.ChromeOptions() #옵션 설정
@@ -70,18 +64,13 @@ def ing(methods=['GET','POST']):
           if bookslist == 1: #책이 한 개만 검색이 되었을때 가장 마지막에 만들 예정
                print("책이 한개 검색되었습니다")
                print("=============================================================")
-               f.write(f"책이 한개 검색되었습니다 \n")
-               f.write("============================================================= \n")
+
           elif 0 >= bookslist: #책이 하나도 없을때
                print(f"{postbookname}라는 책을 찾을 수 없습니다. 다시 검색 해주시기 바랍니다")
-               f.write(f"{postbookname}라는 책을 찾을 수 없습니다. 다시 검색 해주시기 바랍니다 \n")
-               f.close()
                driver.quit()
                exit()
           else: #책이 2개 이상 검색이 되었을때
                print(f"{bookslist}만큼 검색되었습니다")
-               f.write(f"{bookslist}만큼 검색되었습니다 \n")
-               f.write("============================================================= \n")
                print("=============================================================")
 
                j = 0
@@ -99,41 +88,37 @@ def ing(methods=['GET','POST']):
                          
                          bookname.append(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[2]/a/span').get_attribute("innerHTML"))
                          print("책 이름 : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[2]/a/span').get_attribute("innerHTML"))
-                         f.write("책 이름 : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[2]/a/span').get_attribute("innerHTML") + "\n")
+
 
                          #책 저자
                          
                          bookmake.append(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[1]/span[2]').text)
                          print("저자  : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[1]/span[2]').text)
-                         f.write("저자  : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[1]/span[2]').text + "\n")
+
 
                          #책 출판사
                          
                          bookPublisher.append(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[2]/span[2]').text)
                          print("출판사  : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[2]/span[2]').text)
-                         f.write("출판사  : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[2]/span[2]').text + "\n")
+
 
                          #책 청구기호
                          
                          bookNumber.append(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[3]/span[2]').text)
                          print("책 번호  : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[3]/span[2]').text)
-                         f.write("책 번호  : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[3]/div[3]/span[2]').text + "\n")
+
 
                          #대출 가능 여부(대출가능일때)\
                          
                          bookloan.append(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/div').get_attribute("innerHTML"))
                          print("대출 가능 여부 : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/div').get_attribute("innerHTML"))
-                         f.write("대출 가능 여부 : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/div').get_attribute("innerHTML") + "\n")
                          print("=============================================================")
-                         f.write("============================================================= \n")
                     except:
 
 
                          #대출 가능 여부(대출중일때)
 
                          bookloan.append(driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/p').text)
-                         f.write("대출 가능 여부 : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/p').text + "\n")
-                         f.write("=============================================================\n")
                          print("대출 가능 여부 : " + driver.find_element(By.XPATH, f'//*[@id="searchData"]/div/div[3]/div/div[4]/ul[{i}]/li/div[4]/div/p').text)
                          print("=============================================================")
 
@@ -141,7 +126,7 @@ def ing(methods=['GET','POST']):
 
                     
 
-               f.close()
+
                print(bookname)
                print(bookmake)
                print(bookPublisher)
